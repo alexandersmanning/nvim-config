@@ -1,0 +1,21 @@
+set hlsearch
+set incsearch  " Search while typing
+set ignorecase
+set showmatch
+
+set surround
+
+nnoremap ; :
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap <Space>t :action ActivateTerminalToolWindow<CR>
+nnoremap <Space>m :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <Space>c :action OpenEditorInOppositeTabGroup<CR>
+nnoremap <Space>g :action Git.CompareWithBranch<CR>
+nnoremap <Space>b :action ReformatCode<CR>
+nnoremap <C-j> :action PreviousTab<CR>
+nnoremap <C-k> :action NextTab<CR>
