@@ -7,27 +7,23 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-markdown'
   Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'pangloss/vim-javascript'
-  Plug 'jiangmiao/auto-pairs'
   Plug 'airblade/vim-gitgutter'
-  Plug 'alvan/vim-closetag'
   Plug 'chemzqm/vim-jsx-improve'
   Plug 'neomake/neomake'
   Plug 'easymotion/vim-easymotion'
-  Plug 'gregsexton/MatchTag'
   Plug 'jaawerth/neomake-local-eslint-first'
   Plug 'mileszs/ack.vim'
   Plug 'kristijanhusak/vim-hybrid-material'
-  Plug 'fatih/vim-go'
   Plug 'junegunn/goyo.vim'
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-go', { 'do': 'make'}
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'zchee/deoplete-go', { 'do': 'make'}
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'majutsushi/tagbar'
+  Plug 'tomasiser/vim-code-dark'
+  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2'
+  Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+  Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+  Plug 'tpope/vim-rails'
+  Plug 'joukevandermaas/vim-ember-hbs'
 call plug#end()
 
 
@@ -50,8 +46,9 @@ let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
 syntax enable
-set background=dark
-colorscheme hybrid_reverse
+"set background=dark
+colorscheme codedark
+"colorscheme hybrid_reverse
 
 highlight Comment gui=italic
 highlight Comment cterm=italic
@@ -189,6 +186,10 @@ if has('nvim')
   aug END
 end
 
+" ========== NCM2 ==========
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  set completeopt=noinsert,menuone,noselect
+
 " ======== Markdown ========
 let g:markdown_fenced_languages = ['python', 'ruby', 'javascript']
 
@@ -226,53 +227,3 @@ augroup omnifuncs
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 augroup end
-
-" ======== Deoplete ======== 
-let g:acp_enableAtStartup = 0
-set completeopt-=preview
-set completeopt+=noselect
-" Use neocomplete.
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#enable_at_startup=1
-let g:deoplete#smart_case=1
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#omni#input_patterns = {}
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-"------------------------------------------------------------------------------
-" Vim-go
-"------------------------------------------------------------------------------
-let g:go_fmt_fail_silently = 1
-let g:go_fmt_command = "gofmt" "Explicited the formater plugin (gofmt, goimports, goreturn...)
-
-" Show a list of interfaces which is implemented by the type under your cursor
-au FileType go nmap <Leader>s <Plug>(go-implements)
-
-" Show type info for the word under your cursor
-au FileType go nmap <Leader>i <Plug>(go-info)
-
-" Open the relevant Godoc for the word under the cursor
-au FileType go nmap <Leader>gd <Plug>(go-def)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-
-" Open the Godoc in browser
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-
-" Run/build/test/coverage
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
-" By default syntax-highlighting for Functions, Methods and Structs is disabled.
-" Let's enable them!
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_auto_sameids = 1
