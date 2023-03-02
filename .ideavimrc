@@ -4,6 +4,9 @@ set ignorecase
 set showmatch
 
 set surround
+set noerrorbells
+set visualbell
+set clipboard+=unnamed
 
 nnoremap ; :
 noremap <C-l> <C-w>l
@@ -11,6 +14,8 @@ noremap <C-h> <C-w>h
 
 vnoremap < <gv
 vnoremap > >gv
+vnoremap <Space>y :action $Copy<CR>
+vnoremap <Space>p :action $Paste<CR>
 
 nnoremap <Space>t :action ActivateTerminalToolWindow<CR>
 nnoremap <Space>m :action MoveEditorToOppositeTabGroup<CR>
@@ -19,3 +24,4 @@ nnoremap <Space>g :action Git.CompareWithBranch<CR>
 nnoremap <Space>b :action ReformatCode<CR>
 nnoremap <C-j> :action PreviousTab<CR>
 nnoremap <C-k> :action NextTab<CR>
+set ideajoin

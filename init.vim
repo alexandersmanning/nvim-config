@@ -5,25 +5,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-markdown'
-  Plug 'othree/javascript-libraries-syntax.vim'
   Plug 'pangloss/vim-javascript'
   Plug 'airblade/vim-gitgutter'
-  Plug 'chemzqm/vim-jsx-improve'
   Plug 'neomake/neomake'
   Plug 'easymotion/vim-easymotion'
   Plug 'jaawerth/neomake-local-eslint-first'
   Plug 'mileszs/ack.vim'
-  Plug 'kristijanhusak/vim-hybrid-material'
-  Plug 'junegunn/goyo.vim'
-  Plug 'ludovicchabant/vim-gutentags'
-  Plug 'majutsushi/tagbar'
-  Plug 'tomasiser/vim-code-dark'
-  Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-  Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-  Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
-  Plug 'tpope/vim-rails'
-  Plug 'joukevandermaas/vim-ember-hbs'
 call plug#end()
 
 
@@ -42,13 +29,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-
 syntax enable
-"set background=dark
-colorscheme codedark
-"colorscheme hybrid_reverse
 
 highlight Comment gui=italic
 highlight Comment cterm=italic
@@ -100,14 +81,11 @@ augroup END
 set hidden
 let g:airline_powerline_fonts = 1
 let g:airline_theme = "hybrid"
-"let g:airline_theme='oceanicnext'
 let g:airline_section_y = '%{substitute(getcwd(), expand("$HOME"), "~", "g")}'
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '                                 "Left separator for tabline
 let g:airline#extensions#tabline#left_alt_sep = '│'                             "Right separator for tabline
-
-let g:used_javascript_libs = 'angularjs,d3,react,angularuirouter'
 
 " ======= Mapping ===============
 let mapleader=" "
@@ -116,7 +94,6 @@ nnoremap <Down> <NOP>
 nnoremap <Left> <NOP>
 nnoremap <Right> <NOP>
 nnoremap <Leader>c :bp<bar>sp<bar>bn<bar>bd!<CR> " This kills the current buffer without destroying split
-"nnoremap <Leader>c :bp\|bd #<CR> " This kills the current buffer without destroying split
 nnoremap <CR> :noh<CR><CR>  " This unsets highlighting when enter is hit again
 nnoremap <C-p> :FZF -m<CR>
 let g:fzf_action = {
@@ -131,19 +108,19 @@ noremap <C-h> <C-w>h
 map ; :
 com! FormatJSON %!python -m json.tool
 nnoremap <Leader>t :terminal<CR>i
-tnoremap <C-c> <C-\><C-n>
+"tnoremap <C-c> <C-\><C-n>
 
 " " Copy to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
+vnoremap  y  "+y
+nnoremap  Y  "+yg_
+nnoremap  y  "+y
+nnoremap  yy  "+yy
 
 " " Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
+nnoremap p "+p
+nnoremap P "+P
+vnoremap p "+p
+vnoremap P "+P
 
 " stay highlighted after shift
 vnoremap < <gv
@@ -186,12 +163,8 @@ if has('nvim')
   aug END
 end
 
-" ========== NCM2 ==========
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-  set completeopt=noinsert,menuone,noselect
-
 " ======== Markdown ========
-let g:markdown_fenced_languages = ['python', 'ruby', 'javascript']
+let g:markdown_fenced_languages = ['python', 'ruby', 'javascript', 'go']
 
 augroup filetype_ruby
   autocmd!
